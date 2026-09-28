@@ -1,0 +1,82 @@
+:root {
+  --fond: #f6f1e7;
+  --texte: #3a3530;
+  --bouton: #f2a65a;
+  --bouton-texte: #ffffff;
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--fond);
+  color: var(--texte);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+  overflow: hidden;
+}
+#app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6vh;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+button {
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.carte {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2vh;
+  width: min(80vw, 60vh);
+  height: min(80vw, 60vh);
+  border-radius: 12%;
+  background: #ffffff;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  transition: transform 0.15s ease;
+}
+.carte:active { transform: scale(0.96); }
+.carte.pop { animation: pop 0.4s ease; }
+@keyframes pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+.image {
+  font-size: min(48vw, 36vh);
+  line-height: 1;
+  font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+}
+.nom {
+  min-height: 1.4em;
+  font-size: clamp(22px, 6vw, 36px);
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.nom.visible { opacity: 1; }
+.suivant {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: var(--bouton);
+  color: var(--bouton-texte);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(242, 166, 90, 0.45);
+  transition: transform 0.15s ease;
+}
+.suivant:active { transform: scale(0.92); }
