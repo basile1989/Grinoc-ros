@@ -1,9 +1,12 @@
 # Grinocéros
 
 Petite application web installable (PWA) pour apprendre les animaux, les véhicules
-et les objets du quotidien. Une image au hasard s'affiche à l'ouverture ; on touche
-l'image pour entendre son nom (et le cri de l'animal), et le bouton orange affiche
-une autre image.
+et les objets du quotidien. Une image au hasard s'affiche à l'ouverture et son nom
+est lu (avec le cri pour un animal). Tout l'écran est un bouton : la zone de
+l'image ou le bouton bleu « Écouter » relit le nom, le bouton orange « Suivant »
+passe à une autre image. Zoom, sélection et menus sont bloqués pour les petites
+mains. Le navigateur bloque le son tant que l'écran n'a pas été touché une fois :
+à l'ouverture, le premier appui lance la lecture.
 
 Aucune dépendance, aucun serveur : des fichiers HTML/CSS/JS statiques.
 

@@ -3,6 +3,7 @@
   const image = document.getElementById("image");
   const nom = document.getElementById("nom");
   const suivant = document.getElementById("suivant");
+  const ecouter = document.getElementById("ecouter");
 
   let courant = null;
   let audioEnCours = null;
@@ -98,10 +99,58 @@
     jouerCri(courant);
   }
 
-  carte.addEventListener("click", dire);
-  suivant.addEventListener("click", () => afficher(tirer()));
+  // ---- Toucher : reaction des que le doigt se pose, un seul declenchement ----
+  const DELAI_MIN_MS = 500;
+  let dernierToucher = 0;
 
+  function surZone(el, action) {
+    el.addEventListener("pointerdown", ev => {
+      if (!ev.isPrimary) return;
+      ev.preventDefault();
+      el.classList.add("presse");
+      const maintenant = Date.now();
+      if (maintenant - dernierToucher < DELAI_MIN_MS) return;
+      dernierToucher = maintenant;
+      action();
+    });
+    const relacher = () => el.classList.remove("presse");
+    el.addEventListener("pointerup", relacher);
+    el.addEventListener("pointercancel", relacher);
+    el.addEventListener("pointerleave", relacher);
+  }
+
+  function nouvelleImage() {
+    afficher(tirer());
+    dire();
+  }
+
+  surZone(carte, dire);
+  surZone(ecouter, dire);
+  surZone(suivant, nouvelleImage);
+
+  // ---- Bloquer tout le reste : zoom, menu long appui, selection, glissement ----
+  const bloquer = ev => ev.preventDefault();
+  document.addEventListener("contextmenu", bloquer);
+  document.addEventListener("selectstart", bloquer);
+  document.addEventListener("dragstart", bloquer);
+  document.addEventListener("dblclick", bloquer);
+  document.addEventListener("gesturestart", bloquer);
+  document.addEventListener("touchmove", bloquer, { passive: false });
+  document.addEventListener("touchstart", ev => {
+    if (ev.touches.length > 1) ev.preventDefault();
+  }, { passive: false });
+  document.addEventListener("wheel", ev => {
+    if (ev.ctrlKey) ev.preventDefault();
+  }, { passive: false });
+  document.addEventListener("keydown", ev => {
+    if ((ev.ctrlKey || ev.metaKey) && ["+", "-", "=", "0"].includes(ev.key)) ev.preventDefault();
+  });
+
+  // Premiere image : lue tout de suite. Le navigateur peut refuser tout son
+  // avant le premier toucher ; comme tout l'ecran est un bouton, le premier
+  // appui relance la lecture de toute facon.
   afficher(tirer());
+  dire();
 
   // ---- PWA ----
   if ("serviceWorker" in navigator) {

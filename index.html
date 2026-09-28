@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no">
   <title>Grinocéros</title>
   <meta name="description" content="Apprendre les animaux, les véhicules et les objets du quotidien.">
   <meta name="theme-color" content="#f6f1e7">
@@ -16,15 +16,25 @@
 </head>
 <body>
   <main id="app">
-    <button id="carte" class="carte" aria-label="Écouter le nom">
-      <span id="image" class="image" aria-hidden="true"></span>
+    <div id="carte" class="carte">
+      <span id="image" class="image"></span>
       <span id="nom" class="nom"></span>
-    </button>
-    <button id="suivant" class="suivant" aria-label="Une autre image">
-      <svg viewBox="0 0 24 24" width="44" height="44" aria-hidden="true">
-        <path d="M5 12h12M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
+    </div>
+    <div class="barre">
+      <div id="ecouter" class="bouton ecouter">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/>
+          <path d="M16 8.5a4.5 4.5 0 0 1 0 7M18.5 5.5a8.5 8.5 0 0 1 0 13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+        <span class="bouton-texte">Écouter</span>
+      </div>
+      <div id="suivant" class="bouton suivant">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 12h13M11 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="bouton-texte">Suivant</span>
+      </div>
+    </div>
   </main>
   <script src="data.js"></script>
   <script src="app.js"></script>

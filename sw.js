@@ -1,4 +1,4 @@
-const VERSION = "grinoceros-v1";
+const VERSION = "grinoceros-v2";
 const FICHIERS = [
   "./",
   "./index.html",
